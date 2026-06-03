@@ -1,7 +1,10 @@
 import axios from 'axios';
 
+// Ek common baseURL variable banate hain taaki baar-baar localhost use na karna pade
+const baseURL = import.meta.env.VITE_API_URL || 'http://localhost:3000/api';
+
 const instance = axios.create({
-  baseURL: import.meta.env.VITE_API_URL || 'http://localhost:3000/api',
+  baseURL: baseURL,
   withCredentials: true, // Required to send cookies
 });
 
@@ -30,8 +33,8 @@ instance.interceptors.response.use(
       originalRequest._retry = true;
       
       try {
-        // Attempt to refresh token
-        const res = await axios.post(`http://localhost:3000/api/auth/refresh`, {}, { withCredentials: true });
+        // 🔴 BUG FIX: Hardcoded localhost hata kar dynamic baseURL variable use kiya
+        const res = await axios.post(`${baseURL}/auth/refresh`, {}, { withCredentials: true });
         
         // Save new access token
         localStorage.setItem('token', res.data.accessToken);
