@@ -48,8 +48,8 @@ const registerUser = asyncHandler(async (req, res) => {
     // Set refresh token in HTTP-only cookie
     res.cookie('jwt', refreshToken, {
       httpOnly: true,
-      secure: true, // Must be true when sameSite is 'none'
-      sameSite: 'none', // Required for cross-site requests (Vercel → Render)
+      secure: true, 
+      sameSite: 'none', 
       maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
     });
 
@@ -81,8 +81,8 @@ const loginUser = asyncHandler(async (req, res) => {
     // Set refresh token in HTTP-only cookie
     res.cookie('jwt', refreshToken, {
       httpOnly: true,
-      secure: true, // Must be true when sameSite is 'none'
-      sameSite: 'none', // Required for cross-site requests (Vercel → Render)
+      secure: true,
+      sameSite: 'none', 
       maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
     });
 
