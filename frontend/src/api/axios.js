@@ -1,6 +1,5 @@
 import axios from 'axios';
 
-// Ek common baseURL variable banate hain taaki baar-baar localhost use na karna pade
 const baseURL = import.meta.env.VITE_API_URL || 'http://localhost:3000/api';
 
 const instance = axios.create({
@@ -33,7 +32,6 @@ instance.interceptors.response.use(
       originalRequest._retry = true;
       
       try {
-        // 🔴 BUG FIX: Hardcoded localhost hata kar dynamic baseURL variable use kiya
         const res = await axios.post(`${baseURL}/auth/refresh`, {}, { withCredentials: true });
         
         // Save new access token
